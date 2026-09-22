@@ -4,16 +4,20 @@ import About from './components/About';
 import Projects from './components/Projects';
 import Skills from './components/Skills';
 import Journey from './components/Journey';
+import Contact from './Contact';
 
 const App = () => {
   return (
     <>
       <Navbar />
-      <Hero />
-      <About />
-      <Projects />
-      <Skills />
-      <Journey />
+        <main>
+        <Hero />
+        <About />
+        <Projects />
+        <Skills />
+        <Journey />
+        <Contact />
+      </main>
     </>
   )
 }
