@@ -5,6 +5,7 @@ import Projects from './components/Projects';
 import Skills from './components/Skills';
 import Journey from './components/Journey';
 import Contact from './Contact';
+import Footer from './components/Footer';
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
         <Journey />
         <Contact />
       </main>
+    <Footer />
     </>
   )
 }
