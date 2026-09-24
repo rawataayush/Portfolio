@@ -2,35 +2,35 @@
 
 ## Repository Structure
 
-The GitHub repository is the root `Portfolio/` directory. `Website/` is the actual Vite + React application.
+The GitHub repository is the root `Portfolio/` directory. `website/` is the actual Vite + React application.
 
 ```text
 Portfolio/
 ├── README.md
 ├── ARCHITECTURE.md
 ├── .gitignore
-└── Website/
+└── website/
     ├── package.json
     ├── vite.config.js
     ├── public/
+    │   └── projects/
     └── src/
-        ├── assets/
         ├── components/
-        │   ├── Navbar.jsx
+        │   ├── Header.jsx
         │   ├── Hero.jsx
         │   ├── About.jsx
-        │   ├── Projects.jsx
         │   ├── ProjectCard.jsx
+        │   ├── Projects.jsx
         │   ├── Skills.jsx
-        │   ├── Journey.jsx
+        │   ├── Timeline.jsx
         │   ├── Contact.jsx
         │   └── Footer.jsx
         ├── data/
         │   ├── projects.js
         │   ├── skills.js
-        │   └── journey.js
+        │   └── timeline.js
         ├── App.jsx
-        ├── index.css
+        ├── globals.css
         └── main.jsx
 ```
 
@@ -42,13 +42,13 @@ Portfolio/
 function App() {
   return (
     <>
-      <Navbar />
+      <Header />
       <main>
         <Hero />
         <About />
         <Projects />
         <Skills />
-        <Journey />
+        <Timeline />
         <Contact />
       </main>
       <Footer />
@@ -72,7 +72,8 @@ export const projects = [
     description: "Browser tab management application.",
     technologies: ["React", "Tailwind CSS", "Supabase"],
     github: "",
-    live: ""
+    live: "",
+    image: "/projects/tabmarko.webp"
   }
 ];
 ```
@@ -101,12 +102,18 @@ Files that need direct public URLs. Do not use this for ordinary imported assets
 
 ## Styling
 
-The project uses Tailwind CSS.
+The project uses CSS custom properties in `website/src/globals.css`. JSX must not use inline styles. Sizing comes from tokens:
+
+- typography scale with a 1.125 ratio
+- spacing grid with an 8px base
+- breakpoints at 768px (tablet) and 1200px (desktop)
+
+Shared actions use `.btn`, `.btn-primary`, and `.btn-secondary`.
 
 Global design tokens belong in:
 
 ```text
-Website/src/index.css
+website/src/globals.css
 ```
 
 Visual direction:
@@ -123,7 +130,7 @@ Visual direction:
 - no fake statistics
 - restrained animation
 
-Do not create a new token for every individual value. Use Tailwind's existing scale where possible.
+Do not create a new token for every individual value. Use the existing type and spacing scales.
 
 ## Fonts
 
@@ -172,7 +179,7 @@ Do not add `useEffect`, `useContext`, Redux, or other advanced concepts merely f
 
 ### 1. Foundation
 - Vite
-- Tailwind
+- globals.css
 - global styles
 - design tokens
 - fonts
@@ -180,12 +187,13 @@ Do not add `useEffect`, `useContext`, Redux, or other advanced concepts merely f
 - folder structure
 
 ### 2. Layout
-- Navbar
+- Header
 - Hero
 - About
 - Projects
+- ProjectCard
 - Skills
-- Journey
+- Timeline
 - Contact
 - Footer
 
@@ -206,11 +214,11 @@ Typography, spacing, borders, hover/focus states, restrained animation, accessib
 Build with:
 
 ```bash
-cd ~/Portfolio/Website
+cd ~/Portfolio/website
 npm run build
 ```
 
-The deployment root is `Website/`.
+The deployment root is `website/`.
 
 ## Git Rules
 
@@ -246,11 +254,11 @@ Include source code and configuration:
 - `README.md`
 - `ARCHITECTURE.md`
 - `.gitignore`
-- `Website/src/`
-- `Website/public/`
-- `Website/package.json`
-- `Website/package-lock.json`
-- `Website/vite.config.js`
+- `website/src/`
+- `website/public/`
+- `website/package.json`
+- `website/package-lock.json`
+- `website/vite.config.js`
 - required configuration files
 
 Do not push:
@@ -273,7 +281,7 @@ Understand layout
     ↓
 Convert sections to React components
     ↓
-Reuse Tailwind styling
+Apply CSS variables from globals.css
     ↓
 Move repeated content into data/
     ↓
