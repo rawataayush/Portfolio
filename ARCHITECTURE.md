@@ -19,6 +19,7 @@ Portfolio/
         │   ├── Header.jsx
         │   ├── Hero.jsx
         │   ├── About.jsx
+        │   ├── Button.jsx
         │   ├── ProjectCard.jsx
         │   ├── Projects.jsx
         │   ├── Skills.jsx
@@ -102,19 +103,29 @@ Files that need direct public URLs. Do not use this for ordinary imported assets
 
 ## Styling
 
-The project uses CSS custom properties in `website/src/globals.css`. JSX must not use inline styles. Sizing comes from tokens:
+The project uses Tailwind CSS v4. There is no hand-written component CSS: layout and styling live in `className` as utility classes, and every value resolves to a design token. JSX must not use inline styles. Sizing comes from tokens:
 
-- typography scale with a 1.125 ratio
-- spacing grid with an 8px base
-- breakpoints at 768px (tablet) and 1200px (desktop)
+- typography scale with a 1.125 ratio, `text-xs` through `text-8xl`
+- spacing grid with an 8px base, so `p-1` is 8px and `p-4` is 32px
+- breakpoints: `md` at 768px (tablet) and `desktop` at 1200px
 
-Shared actions use `.btn`, `.btn-primary`, and `.btn-secondary`.
+Shared actions use the `Button` component, not repeated class lists:
 
-Global design tokens belong in:
+```jsx
+<Button as="a" href="#contact" variant="secondary">Contact</Button>
+```
+
+`variant` is `"primary"` (filled) or `"secondary"` (outline). `grow` stretches a button to fill a flex row. `as` switches between `<a>` and `<button>`.
+
+Global design tokens belong in the `@theme` block:
 
 ```text
 website/src/globals.css
 ```
+
+The color tokens are `bg`, `bg-muted`, `ink`, `ink-muted`, `line`, `line-soft`, and `inverse`, so they read as `bg-bg`, `text-ink`, and `border-line`. Fonts are `font-sans` and `font-mono`. Icons use the `material-symbols-outlined` utility.
+
+Tailwind is wired through the `@tailwindcss/vite` plugin in `vite.config.js`. `globals.css` holds only the `@import "tailwindcss"`, the `@theme` tokens, a small `@layer base` block, and the Material Symbols utility. It should not grow component rules.
 
 Visual direction:
 
@@ -130,7 +141,7 @@ Visual direction:
 - no fake statistics
 - restrained animation
 
-Do not create a new token for every individual value. Use the existing type and spacing scales.
+Do not create a new token for every individual value. Use the existing type and spacing scales, and prefer a token over an arbitrary value such as `text-[15px]` or `p-[13px]`.
 
 ## Fonts
 
@@ -148,7 +159,7 @@ font-family: "Inter", sans-serif;
 
 System-installed fonts work for local development, but a public site needs a properly licensed webfont if exact rendering across visitors' devices is required.
 
-## Icons
+## Icon
 
 Use Material Symbols Outlined.
 
@@ -281,7 +292,7 @@ Understand layout
     ↓
 Convert sections to React components
     ↓
-Apply CSS variables from globals.css
+Apply the @theme tokens from globals.css
     ↓
 Move repeated content into data/
     ↓

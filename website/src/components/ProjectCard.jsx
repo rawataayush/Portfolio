@@ -1,53 +1,64 @@
+import Button from "./Button";
+
 /** Single project tile: media, copy, stack, and outbound links. */
 const ProjectCard = ({ project }) => {
   const liveAvailable = Boolean(project.live);
 
   return (
-    <article className="project-card">
-      <div className="project-media">
+    <article className="flex min-w-0 flex-col border border-line bg-bg">
+      <div className="aspect-16/10 overflow-hidden border-b border-line bg-bg-muted">
         <img
-          src={project.image}
           alt={`${project.title} preview`}
-          loading="lazy"
-          width="1200"
+          className="h-full w-full object-cover"
           height="750"
+          loading="lazy"
+          src={project.image}
+          width="1200"
         />
       </div>
-      <div className="project-body">
-        <h3 className="project-title">{project.title}</h3>
-        <p className="project-description">{project.description}</p>
-        <ul className="tech-list">
+      <div className="flex flex-1 flex-col gap-2 p-3">
+        <h3 className="text-xl leading-snug tracking-[-0.02em] uppercase">
+          {project.title}
+        </h3>
+        <p className="text-md text-ink-muted">{project.description}</p>
+        <ul className="flex flex-wrap gap-1">
           {project.tech.map((item) => (
-            <li className="tech-chip" key={item}>
+            <li
+              className="border border-line px-1 py-0.5 font-mono text-xs tracking-[0.04em] uppercase"
+              key={item}
+            >
               {item}
             </li>
           ))}
         </ul>
-        <div className="project-links">
-          <a
-            className="btn btn-primary"
+        <div className="mt-auto flex flex-wrap gap-1 pt-1">
+          <Button
+            as="a"
+            grow
             href={project.github}
             rel="noreferrer"
             target="_blank"
           >
             GitHub
-            <span className="material-symbols-outlined" aria-hidden="true">
+            <span aria-hidden="true" className="material-symbols-outlined">
               arrow_outward
             </span>
-          </a>
-          <a
-            className="btn btn-secondary"
+          </Button>
+          <Button
+            aria-disabled={liveAvailable ? undefined : "true"}
+            as="a"
+            grow
             href={liveAvailable ? project.live : "#projects"}
             rel={liveAvailable ? "noreferrer" : undefined}
             target={liveAvailable ? "_blank" : undefined}
-            aria-disabled={liveAvailable ? undefined : "true"}
             title={liveAvailable ? "Open live site" : "Live demo not published yet"}
+            variant="secondary"
           >
             Live
-            <span className="material-symbols-outlined" aria-hidden="true">
+            <span aria-hidden="true" className="material-symbols-outlined">
               arrow_outward
             </span>
-          </a>
+          </Button>
         </div>
       </div>
     </article>

@@ -9,8 +9,11 @@ import Footer from "./components/Footer";
 
 const App = () => {
   return (
-    <div className="page">
-      <a className="skip-link" href="#projects">
+    <div className="min-w-0">
+      <a
+        className="absolute -top-20 left-2 z-[51] bg-ink px-2 py-1 text-inverse focus:top-2"
+        href="#projects"
+      >
         Skip to work
       </a>
       <Header />
