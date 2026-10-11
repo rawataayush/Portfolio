@@ -13,14 +13,11 @@ const Hero = () => {
           <span>Web developer & student · 2026</span>
         </div>
         <h1 className="mb-5 max-w-[18ch] text-5xl leading-tight tracking-[-0.04em] uppercase md:text-6xl desktop:text-8xl">
-          Building for the web. Learning. Iterating.
+          I build websites and web applications
         </h1>
         <div className="grid grid-cols-1 gap-4 desktop:grid-cols-[2fr_1fr] desktop:items-start">
           <p className="max-w-80 text-lg text-ink-muted">
-            I&apos;m Aayush, a web developer and online BCA student at Shoolini
-            University focused on React, JavaScript, and modern frontend
-            development. I learn by building real projects and turning ideas
-            into functional interfaces.
+            I&apos;m Aayush, a web developer focused on frontend development, interactive interfaces, and building practical web projects with modern technologies.
           </p>
           <div className="flex flex-col gap-1">
             <Button as="a" href="#projects">
